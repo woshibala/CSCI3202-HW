@@ -12,18 +12,24 @@ class Binary_tree:
 
     def __init__(self,root_key):
     	self.root = node(None,None,None,root_key)
+        self.search_result = node(None,None,None,None)
 
     def add(self,value,parentValue):
-        current = self.__preorder_search(self.root,parentValue)#use pre-order search to get the parent node
-        #print current.key
-        if current.left_child == None:
-        	current.left_child = node(None,None,current,value)#find if the node already has a left child
-        	return current.left_child.key
-        elif current.right_child == None:
-        	current.right_child = node(None,None,current,value)#find if the node already has a right child
-        	return
+        self.__preorder_search(self.root,parentValue)#use pre-order search to get the parent node
+        if self.search_result.key == parentValue:
+            current = self.search_result
+            #print current.key
+            if current.left_child == None:
+                current.left_child = node(None,None,current,value)#find if the node already has a left child
+                return 
+            elif current.right_child == None:
+                current.right_child = node(None,None,current,value)#find if the node already has a right child
+                return
+            else:
+                print ("Parent has two children, node not added")
         else:
-        	print ("Parent has two children, node not added")
+            print("Parent not found")
+        
    
     def Print(self):#print the whole tree 
     	self.print_preorder(self.root)
@@ -31,8 +37,8 @@ class Binary_tree:
     def __preorder_search(self,current,goal):#search the tree recursively
         if current != None:
             if current.key == goal: 
-                print "found",current.key
-            	return current
+                #print "found",current.key
+            	self.search_result = current
             else:
         	    self.__preorder_search(current.left_child,goal)
         	    self.__preorder_search(current.right_child,goal)
@@ -78,8 +84,8 @@ class Binary_tree:
  
     
 t = Binary_tree(1)
-print t.add(2,1)
-print t.add(3,1)
+t.add(2,1)
+t.add(3,1)
 t.Print()
 t.add(4,2)
 t.add(5,2)
