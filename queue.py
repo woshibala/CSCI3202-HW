@@ -29,7 +29,6 @@ class Queue_int(object):
 
 
 aaa = Queue_int()
-aaa.queue = Queue.Queue(maxsize=max)
 aaa.enqueue(1)
 aaa.enqueue(2)
 print aaa.dequeue()
